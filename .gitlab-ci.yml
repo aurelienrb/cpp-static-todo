@@ -1,0 +1,51 @@
+gcc-5.1:
+  image: gcc:5.1
+  script:
+    - g++ -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+    - g++ -std=c++17 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+gcc-6.1:
+  image: gcc:6.1
+  script:
+    - g++ -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+    - g++ -std=c++17 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+gcc-7.1:
+  image: gcc:7.1
+  script:
+    - g++ -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+    - g++ -std=c++17 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+gcc-8.1:
+  image: gcc:8.1
+  script:
+    - g++ -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+    - g++ -std=c++17 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+clang-3.9:
+  image: teeks99/clang-ubuntu:3.9
+  script:
+    - clang++-3.9 -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+clang-4:
+  image: teeks99/clang-ubuntu:4
+  script:
+    - clang++-4.0 -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+clang-5:
+  image: teeks99/clang-ubuntu:5
+  script:
+    - clang++-5.0 -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+    - clang++-5.0 -std=c++17 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+clang-6:
+  image: teeks99/clang-ubuntu:6
+  script:
+    - clang++-6.0 -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+    - clang++-6.0 -std=c++17 -Wall -Wextra -pedantic -Werror -c example.cpp
+
+clang-7:
+  image: teeks99/clang-ubuntu:7
+  script:
+    - clang++-7 -std=c++14 -Wall -Wextra -pedantic -Werror -c example.cpp
+    - clang++-7 -std=c++17 -Wall -Wextra -pedantic -Werror -c example.cpp
