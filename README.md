@@ -26,7 +26,7 @@ example.cpp:6:1: note: in expansion of macro 'TODO_BEFORE'
 
 ## Supported compilers
 
-The code requires a **C++14** compiler (it *won't* work in C++11 mode).
+The code requires a **C++11** compiler.
 
 It has been successfully tested with a high level of warnings on:
 - g++ >= 5.1 (`-std=c++14`)
