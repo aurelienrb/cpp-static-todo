@@ -1,39 +1,38 @@
 #pragma once
 
-// Returns the year from the current build date
-constexpr int current_build_year() {
-    // exemple: "Nov 27 2018"
-    const char *year = __DATE__;
-
-    // skip the 2 first spaces
-    int nbSpaces = 0;
-    while (nbSpaces < 2) {
-        if (*year == ' ') {
-            nbSpaces++;
-        }
-        year++;
+namespace details {
+    constexpr const char *find_next(const char *s, const char c) {
+        return (*s == c) ? s : find_next(s + 1, c);
     }
 
-    return (year[0] - '0') * 1000 + (year[1] - '0') * 100 + (year[2] - '0') * 10 + (year[3] - '0');
+    constexpr const char *find_prev(const char *s, const char c) {
+        return (*s == c) ? s : find_prev(s - 1, c);
+    }
+
+    constexpr int to_int(const char *year) {
+        return (year[0] - '0') * 1000 + (year[1] - '0') * 100 + (year[2] - '0') * 10 + (year[3] - '0');
+    }
+
+    constexpr bool strncmp(const char *a, const char *b, const int n) {
+        return (n > 0 && *a == *b) ? strncmp(a + 1, b + 1, n - 1) : (n == 0);
+    }
+
+    constexpr int find_month(const char (&l)[12][4], const int index, const char *s) {
+        return (index < 0 || strncmp(l[index], s, 3)) ? index : find_month(l, index - 1, s);
+    }
+
+    constexpr const char months[12][4]{
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+}
+
+// Returns the year from the current build date
+constexpr int current_build_year() {
+    return details::to_int(details::find_prev(details::find_next(__DATE__, '\0'), ' ') + 1);
 }
 
 // Returns the month number (1..12) from the current build date
 constexpr int current_build_month() {
-    constexpr const char months[12][4]{
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-
-    // exemple: "Nov 27 2018"
-    constexpr const char date[] = __DATE__;
-
-    // find matching month
-    for (int i = 0; i < 12; i++) {
-        const char *m = months[i];
-        if (m[0] == date[0] && m[1] == date[1] && m[2] == date[2]) {
-            return i + 1;
-        }
-    }
-
-    return 0; // will be caught by the static_assert() check on month value
+    return details::find_month(details::months, 11, __DATE__) + 1;
 }
 
 /// TODO_BEFORE() inserts a compilation "time bomb" that will trigger a "TODO" build error a soon as
