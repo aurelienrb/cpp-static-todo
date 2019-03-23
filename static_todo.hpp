@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CPP_STATIC_TODO
+#define CPP_STATIC_TODO
 
 // Returns the year from the current build date
 constexpr int current_build_year() {
@@ -56,3 +57,5 @@ constexpr int current_build_month() {
                       (current_build_year() < year ||                                              \
                           (current_build_year() == year && current_build_month() < month)),        \
         "FIXME: " msg)
+
+#endif
