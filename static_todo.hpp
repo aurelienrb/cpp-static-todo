@@ -45,14 +45,14 @@ constexpr int current_build_month() {
 /// Example:
 ///     TODO_BEFORE(01, 2019, "refactor to use std::optional<> once we compile in C++17 mode");
 #define TODO_BEFORE(month, year, msg)                                                              \
-    static_assert((year >= 2018 && month > 0 && month <= 12) &&                                    \
+    static_assert((year >= 2019 && month > 0 && month <= 12) &&                                    \
                       (current_build_year() < year ||                                              \
                           (current_build_year() == year && current_build_month() < month)),        \
         "TODO: " msg)
 
 /// FIXME_BEFORE() works the same way than TODO_BEFORE() but triggers a "FIXME" error instead
 #define FIXME_BEFORE(month, year, msg)                                                             \
-    static_assert((year >= 2018 && month > 0 && month <= 12) &&                                    \
+    static_assert((year >= 2019 && month > 0 && month <= 12) &&                                    \
                       (current_build_year() < year ||                                              \
                           (current_build_year() == year && current_build_month() < month)),        \
         "FIXME: " msg)
