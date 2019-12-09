@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef CPP_STATIC_TODO_ENABLE
+
 constexpr int current_build_year() {
     // example: "Nov 27 2018"
     const char *year = __DATE__;
@@ -42,3 +44,10 @@ constexpr int current_build_month() {
                       (current_build_year() < year ||                                              \
                           (current_build_year() == year && current_build_month() < month)),        \
         "FIXME: " msg)
+
+#else
+
+#define TODO_BEFORE(month, year, msg)
+#define FIXME_BEFORE(month, year, msg)
+
+#endif
